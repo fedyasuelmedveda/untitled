@@ -14,9 +14,8 @@ class dot (object):
 
     def __init__(self, ):
 '''
-
-rVector = (250,250)
-rad = 150
+#rVector = (250,250)
+#rad = 150
 #lobal mouseVc
 '''
 def mod(x):
@@ -44,27 +43,43 @@ def MakeCircle(size, color1, color2, vector, R):
 
 mouseVc = (0,0)
 def Update():
-    changePenColor(c,randColor())
-    changeFillColor(c,randColor())
-    changePenColor(zrachok,randColor())
-    changeFillColor(zrachok,randColor())
-    onMouseMove(handleMove)
-    mousex=mouseVc[0]-rVector[0]
-    mousey=mouseVc[1]-rVector[1]
-    x = rVector[0] + ((mousex * rad) /(math.sqrt(mousex * mousex+mousey * mousey+rad*rad))/1.5) + (random.random()-0.5)*d
-    y = rVector[1] + ((mousey * rad) /(math.sqrt(mousey * mousey+mousex * mousex+rad*rad))/1.5) + (random.random()-0.5)*d
-    #((random.random()-0.7)*rad)/c
-    moveObjectTo(zrachok,x-25,y-25)
-#    moveObjectTo(g,x,y)
+    global array
+    for a in array:
+        cen = a[0]
+        zr = a[1]
+        rV = a[2]
+        r = a[3]
+        print(a[3])
+        changePenColor(cen,randColor())
+        changeFillColor(cen,randColor())
+        changePenColor(zr,randColor())
+        changeFillColor(zr,randColor())
+        onMouseMove(handleMove)
+        mousex=mouseVc[0]-rV[0]
+        mousey=mouseVc[1]-rV[1]
+        d = random.randrange(5,10)
+        x = rV[0] + ((mousex * r) /(math.sqrt(mousex * mousex+mousey * mousey+r*r))/1.5) + (random.random()-0.5)*d
+        y = rV[1] + ((mousey * r) /(math.sqrt(mousey * mousey+mousex * mousex+r*r))/1.5) + (random.random()-0.5)*d
+        moveObjectTo(zr,x-r/6,y-r/6)
+
+
+
 def handleMove(event):
     global mouseVc
     mouseVc = (event.x,event.y)
 #    print(event.x)
+global array
+array = []
+for i in range(10):
+    rad = random.randrange(20,100)
+    x = random.randrange(50,450)
+    y = random.randrange(50,450)
+    rVector = (x,y)
+    c = MakeCircle(rad/20, (0, 0, 0), (255, 255, 255), rVector, rad)
+    zrachok = MakeCircle(rad/6, (0, 0, 0), (0, 0, 0), rVector, rad / 5)
+    array.append((c,zrachok,rVector,rad))
+    #g =circle(0,0, 20)
 
-c = MakeCircle(10,(0,0,0),(255,255,255), rVector, rad)
-zrachok = MakeCircle(10,(0,0,0),(0,0,0),rVector,rad/5)
-#g =circle(0,0, 20)
-d = 40
 
 
 onTimer(Update,70)
