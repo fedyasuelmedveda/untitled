@@ -50,17 +50,20 @@ def Update():
         rV = a[2]
         r = a[3]
         print(a[3])
+        '''
         changePenColor(cen,randColor())
         changeFillColor(cen,randColor())
         changePenColor(zr,randColor())
         changeFillColor(zr,randColor())
+        '''
         onMouseMove(handleMove)
+
         mousex=mouseVc[0]-rV[0]
         mousey=mouseVc[1]-rV[1]
         d = random.randrange(5,10)
         x = rV[0] + ((mousex * r) /(math.sqrt(mousex * mousex+mousey * mousey+r*r))/1.5) + (random.random()-0.5)*d
         y = rV[1] + ((mousey * r) /(math.sqrt(mousey * mousey+mousex * mousex+r*r))/1.5) + (random.random()-0.5)*d
-        moveObjectTo(zr,x-r/6,y-r/6)
+        moveObjectTo(zr,x-r/5,y-r/5)
 
 
 
@@ -70,13 +73,14 @@ def handleMove(event):
 #    print(event.x)
 global array
 array = []
-for i in range(10):
+n = random.randrange(5,15)
+for i in range(n):
     rad = random.randrange(20,100)
     x = random.randrange(50,450)
     y = random.randrange(50,450)
     rVector = (x,y)
-    c = MakeCircle(rad/20, (0, 0, 0), (255, 255, 255), rVector, rad)
-    zrachok = MakeCircle(rad/6, (0, 0, 0), (0, 0, 0), rVector, rad / 5)
+    c = MakeCircle(rad/20, randColor(), randColor(), rVector, rad)
+    zrachok = MakeCircle(rad/15, randColor(), randColor(), rVector, rad / 4)
     array.append((c,zrachok,rVector,rad))
     #g =circle(0,0, 20)
 
