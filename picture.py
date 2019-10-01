@@ -47,22 +47,42 @@ def Update():
     for a in array:
         cen = a[0]
         zr = a[1]
-        rV = a[2]
         r = a[3]
-        print(a[3])
+        s = a[4]
+        #print(a[3])
         '''
         changePenColor(cen,randColor())
         changeFillColor(cen,randColor())
         changePenColor(zr,randColor())
         changeFillColor(zr,randColor())
         '''
+        '''moveObjectBy(cen,s[0],s[1])
+        moveObjectBy(zr,s[0],s[1])
+        '''
         onMouseMove(handleMove)
+        '''
+        if(coords(cen)[0]+s[0]<0):
+            s[0] = -s[0]
+        if(coords(cen)[1]+s[1]<0):
+            s[1] = -s[1]
+        if (coords(cen)[0] + s[0] > 500):
+            s[0] = -s[0]
+        if (coords(cen)[1] + s[1] < 500):
+            a[4] = -a[4]
+            '''
+        moveObjectBy(cen,s[0],s[1])
 
-        mousex=mouseVc[0]-rV[0]
-        mousey=mouseVc[1]-rV[1]
+        rV = (coords(cen)[0], coords(cen)[1])
+        print(rV)
+        rr = (r, r)
+
+        rVec = (rV[0]+rr[0], rV[1]+rr[1])
+
+        mousex=mouseVc[0]-rVec[0]
+        mousey=mouseVc[1]-rVec[1]
         d = random.randrange(5,10)
-        x = rV[0] + ((mousex * r) /(math.sqrt(mousex * mousex+mousey * mousey+r*r))/1.5) + (random.random()-0.5)*d
-        y = rV[1] + ((mousey * r) /(math.sqrt(mousey * mousey+mousex * mousex+r*r))/1.5) + (random.random()-0.5)*d
+        x = rVec[0] + ((mousex * r) /(math.sqrt(mousex * mousex+mousey * mousey+r*r))/1.5) + (random.random()-0.5)*d*0
+        y = rVec[1] + ((mousey * r) /(math.sqrt(mousey * mousey+mousex * mousex+r*r))/1.5) + (random.random()-0.5)*d*0
         moveObjectTo(zr,x-r/5,y-r/5)
 
 
@@ -79,9 +99,12 @@ for i in range(n):
     x = random.randrange(50,450)
     y = random.randrange(50,450)
     rVector = (x,y)
+    x = random.randrange(-5,5)
+    y = random.randrange(-5,5)
+    sVector = (x,y)
     c = MakeCircle(rad/20, randColor(), randColor(), rVector, rad)
     zrachok = MakeCircle(rad/15, randColor(), randColor(), rVector, rad / 4)
-    array.append((c,zrachok,rVector,rad))
+    array.append((c,zrachok,rVector,rad,sVector))
     #g =circle(0,0, 20)
 
 
