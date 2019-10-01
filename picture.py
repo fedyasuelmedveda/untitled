@@ -34,6 +34,7 @@ def MakeCircle(size, color1, color2, vector, R):
 def HandleMove(event):
     return (event.x,event.y)
 '''
+
 def MakeCircle(size, color1, color2, vector, R):
     penSize(size)
     penColor(random.randrange(255),random.randrange(255),random.randrange(255))
@@ -60,17 +61,9 @@ def Update():
         moveObjectBy(zr,s[0],s[1])
         '''
         onMouseMove(handleMove)
-        '''
-        if(coords(cen)[0]+s[0]<0):
-            s[0] = -s[0]
-        if(coords(cen)[1]+s[1]<0):
-            s[1] = -s[1]
-        if (coords(cen)[0] + s[0] > 500):
-            s[0] = -s[0]
-        if (coords(cen)[1] + s[1] < 500):
-            a[4] = -a[4]
-            '''
-        moveObjectBy(cen,s[0],s[1])
+
+        if(coords(cen)[0]+s[0]>0 and coords(cen)[1]+s[1]>0 and coords(cen)[0] + s[0] < 400-r and coords(cen)[1] + s[1] < 500-r):
+            moveObjectBy(cen,s[0],s[1])
 
         rV = (coords(cen)[0], coords(cen)[1])
         print(rV)
